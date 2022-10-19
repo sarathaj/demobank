@@ -1,0 +1,186 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+{% block title %}New User Registration{% endblock %}
+{% block body %}
+
+
+<center>
+    <h2>New User Registration</h2>
+	<div class="container">
+    <form role="form" name="frm" action="{% url 'user_details_add' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+			<label for="fname">Name</label>
+	        <input class="form-control" type="text"  id="fname" name="fname" placeholder=" Name" required="required">
+		</div>
+	    <div class="form-group">
+            <label>Gender :</label>
+			<div class="custom-control custom-radio custom-control-inline">
+  				<input type="radio" class="custom-control-input" id="gender1" name="gender" value="Male">
+  				<label class="custom-control-label" for="gender1">Male</label>
+			</div>
+			<div class="custom-control custom-radio custom-control-inline">
+  				<input type="radio" class="custom-control-input" id="gender2" name="gender" value="Female">
+  				<label class="custom-control-label" for="gender2">Female</label>
+			</div>
+		</div>
+        <div class="form-group">
+			<label for="contact">Age</label>
+	        <input type="text"  class="form-control" id="age" name="age">
+		</div>
+
+	    <div class="form-group">
+			<label for="addr">Address</label>
+	        <input class="form-control" type="text"  id="addr" name="addr" placeholder="Street" >
+            <input type="text"  class="form-control" id="pin" name="pin" placeholder="pin" >
+		</div>
+	    <div class="form-group">
+			<label for="contact">Contact</label>
+	        <input type="text"  class="form-control" id="contact" name="contact" placeholder="Enter contact">
+		</div>
+<!--		<div class="form-group">-->
+<!--			<label for="email">Email</label>-->
+<!--	        <input type="email" class="form-control" id="email" name="email" placeholder="Enter email id"></td>-->
+<!--		</div>-->
+<!--        <div class="form-group">-->
+<!--			<label for="pwd">password</label>-->
+<!--	        <input type="password" class="form-control" id="pwd" name="pwd"></td>-->
+<!--		</div>-->
+		  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script language="javascript" type="text/javascript">
+    $(document).ready(function() {
+        //create arrays to store option and values
+        var thrissur = [
+            {display: "Pudukkad", value: "pudukkad" },
+            {display: "Ollor", value: "ollur" },
+            {display: "olari", value: "olari" },
+            {display: "chalakudy", value: "chalakudy" },
+
+        ];
+
+        var ernakulam = [
+            {display: "aluva", value: "aluva" },
+            {display: "edapilly", value: "edapilly" },
+            {display: "kallur", value: "kallur" },
+
+
+        ];
+
+          var palakkad = [
+            {display: "koppam", value: "koppam" },
+            {display: "kotayi", value: "kotayi" },
+            {display: "alathur", value: "alathur" },
+
+
+        ];
+
+
+          var idukki = [
+            {display: "munnar", value: "munnar" },
+            {display: "kattapana", value: "kattapana" },
+            {display: "mava", value: "mava" },
+
+
+        ];
+
+
+          var alapuzha = [
+            {display: "alagod", value: "alagod" },
+            {display: "muply", value: "muply" },
+            {display: "mondor", value: "mondor" },
+
+
+        ];
+
+
+        //If parent option is changed
+        $("#parent_selection").change(function() {
+            var parent = $(this).val(); //get option value from parent
+            switch(parent){ //using switch compare selected option and populate child
+                case 'thrissur':
+                    $('#child_selection').attr('disabled', false);
+                    list(thrissur);
+                    break;
+                case 'ernakulam':
+                    $('#child_selection').attr('disabled', false);
+                    list(ernakulam);
+                    break;
+                case 'palakkad':
+                    $('#child_selection').attr('disabled', false);
+                    list(palakkad);
+                    break;
+                case 'idukki':
+                    $('#child_selection').attr('disabled', false);
+                    list(idukki);
+                    break;
+                case 'alapuzha':
+                    $('#child_selection').attr('disabled', false);
+                    list(alapuzha);
+                    break;
+                default: //default child option is blank
+                    $("#child_selection").html('');
+                    $('#child_selection').attr("disabled", true);
+                    break;
+            }
+        });
+
+        //function to populate child select box
+        function list(array_list) {
+            $("#child_selection").html(""); //reset child options
+            $(array_list).each(function (i) { //populate child options
+                $("#child_selection").append("<option value='" + array_list[i].value + "'>" + array_list[i].display + "</option>");
+            });
+        }
+    });
+    </script>
+	  <div class="wrapper">
+        Select  District:
+        <select name="parent_selection" id="parent_selection">
+            <option value="">-- Please Select --</option>
+            <option value="thrissur">thrissur</option>
+            <option value="ernakulam">ernakulam</option>
+          <option value="palakkad">idukki</option>
+          <option value="idukki">alapuzha</option>
+          <option value="alapuzha">palakkad</option>
+        </select>
+        <select name="child_selection" id="child_selection" disabled="disabled"/>
+    </div>
+		<div class="form-group">
+			<label for="email">Email</label>
+	        <input type="email" class="form-control" id="email" name="email" placeholder="Enter email id"></td>
+		</div>
+
+		<br>
+		<h6>materials provided</h6>
+
+<form action="/action_page.php">
+  <input type="checkbox" id="debit" name="debit" value="debit">
+  <label for="debit"> Debit card</label><br>
+  <input type="checkbox" id="credit" name="credit" value="credit">
+  <label for="credit"> Credit card</label><br>
+
+
+
+		<div>
+<label for="type">Choose Account type:</label>
+
+<select id="type">
+  <option label="savings"></option>
+  <option label="current"></option>
+</select>
+
+
+</div>
+
+
+	    <button type="submit" class="btn btn-info" id="bt" name="bt">submit</button>
+        <button type="logout" class="btn btn-info" id="rt" name="rt">logout</button>
+
+	    </table>
+    </form>
+	{{msg}}
+		<a href="{% url 'login' %}">go home</a>
+	</div>
+</center>
+{% endblock %}
